@@ -35,6 +35,9 @@ echo $int > /home/zerto/include/interval.txt
 line="@daily /usr/bin/pwsh /home/zerto/zplanner/workers/vm-vminfo.ps1"
 (crontab -u zerto -l; echo "$line" ) | crontab -u zerto -
 
+line="@daily /usr/bin/pwsh /home/zerto/zplanner/workers/vm-getvms.ps1"
+(crontab -u zerto -l; echo "$line" ) | crontab -u zerto -
+
 line="@daily /usr/bin/find /home/zerto/logs -mtime +7 -type f -delete"
 (crontab -u zerto -l; echo "$line" ) | crontab -u zerto -
 

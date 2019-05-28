@@ -10,12 +10,18 @@ $pass = read-host -assecurestring -Prompt 'Enter vCenter password' | convertfrom
 
 $vcenter = "vcenter="+$vcenter
 $vcenter | out-file /home/zerto/include/config.txt
-$vcenter | out-file /home/zerto/include/config.ini -Append
 
 $user = "username="+$user
 $user | out-file /home/zerto/include/config.txt -Append
 
 $pass = "password="+$pass
 $pass | out-file /home/zerto/include/config.txt -Append
+
+$reply = Read-Host -Prompt "Would you like to automatically monitor VMs based on a tag?[y/n]"
+if ( $reply -match "[yY]" ) {
+    $tag = "tag="+$tag
+	$tag | out-file /home/zerto/include/config.txt -Append
+	Write-Host "Changes made to the monitored VM list will be overwritten based on the tag $tag"
+}
 
 Write-Host "Information Written to Configuration files"
